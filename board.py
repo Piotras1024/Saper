@@ -1,4 +1,5 @@
 from field import Field
+import random
 
 
 class Board:
@@ -14,7 +15,9 @@ class Board:
         for y in range(self.height):
             print("|".join(map(lambda f: f.string(), self.board[y])))
 
-    def add_bombs(self, number_of_bombs):
-        for i in range(number_of_bombs):
-            Field(self.width, self.height).bomb = True
-        pass
+    def add_bombs(self, bombs=10):
+        while bombs > 0:
+            x, y = random.randrange(self.width), random.randrange(self.height)
+            if not self.board[y][x].bomb:
+                self.board[y][x].bomb = True
+                bombs -= 1
