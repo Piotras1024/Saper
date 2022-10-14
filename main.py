@@ -4,5 +4,5 @@ import random
 
 b = Board()
 b.clean_board()
-Field(2, 2, False).bomb = True
+b.add_bombs()
 b.print_board()

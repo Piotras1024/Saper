@@ -7,3 +7,9 @@ class Field:
 
     def string(self):
         return f"[{self.x},{self.y}, {self.bomb}]"
+
+    def add_bomb(self):
+        if not self.bomb:
+            self.bomb = True
+            return True
+        return False

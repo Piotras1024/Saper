@@ -19,5 +19,5 @@ class Board:
         while bombs > 0:
             x, y = random.randrange(self.width), random.randrange(self.height)
             if not self.board[y][x].bomb:
-                self.board[y][x].bomb = True
+                self.board[y][x].add_bomb()
                 bombs -= 1
