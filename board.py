@@ -33,3 +33,14 @@ class Board:
                 if self.board[yy][xx].bomb:
                     bombs += 1
         return bombs
+
+    def uncover_field(self, x, y):
+        if not self.board[y][x].uncover():
+            return False
+
+        if self.bombs_around(x, y) == 0:
+            for yy in range(max(y-1, 0), min(y+2, self.height)):
+                for xx in range(max(x-1, 0), min(x+2, self.width)):
+                    self.uncover_field(xx, yy)
+
+        return True
