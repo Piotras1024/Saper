@@ -11,12 +11,13 @@ class Board:
         self.add_bombs(self.bombs)
 
     def clean_board(self):
-        return [[Field(x, y) for y in range(self.height)] for x in range(self.width)]
+        self.board = [[Field(x, y) for y in range(self.height)] for x in range(self.width)]
+        return self.board
 
     def print(self):
         print("y x" + " ".join(map(lambda x: str(x), range(self.width))))
         for y in range(self.height):
-            print(f"{y} |" + "|".join(map(lambda f: f.string(), self.board[y])) + "|")
+            print(f"{y} |" + "|".join(map(lambda x: self.board[y][x].string(self.bombs_around(x, y)), range(len(self.board[y])))) + "|")
 
     def add_bombs(self, bombs=10):
         while bombs > 0:
@@ -25,5 +26,10 @@ class Board:
                 self.board[y][x].add_bomb()
                 bombs -= 1
 
-
-
+    def bombs_around(self, x, y):
+        bombs = 0
+        for yy in range(max(y-1, 0), min(y+2, self.height)):
+            for xx in range(max(x-1, 0), min(x+2, self.width)):
+                if self.board[yy][xx].bomb:
+                    bombs += 1
+        return bombs

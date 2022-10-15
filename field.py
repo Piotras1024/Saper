@@ -5,11 +5,13 @@ class Field:
         self.uncovered = False
         self.bomb = bomb
 
-    def string(self):
+    def string(self, bombs_around=0):
         if self.uncovered:
             if self.bomb:
                 return "B"
-            return f"_"
+            if bombs_around == 0:
+                return f"_"
+            return str(bombs_around)
         return "x"
 
     def add_bomb(self):
