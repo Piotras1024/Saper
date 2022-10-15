@@ -1,8 +1,5 @@
-from board import Board
-from field import Field
-import random
+from game import Game
 
-b = Board()
-b.clean_board()
-b.add_bombs()
-b.print_board()
+
+if __name__ == "__main__":
+    Game().run()
